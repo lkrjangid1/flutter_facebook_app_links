@@ -1,0 +1,43 @@
+group 'it.remedia.flutter_facebook_app_links'
+version '3.0'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 19
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+     
+    if (project.android.hasProperty('namespace')) {
+        namespace 'it.remedia.flutter_facebook_app_links'
+    }
+
+    dependencies {
+        implementation 'com.facebook.android:facebook-core:16.3.0'
+        implementation 'com.facebook.android:facebook-applinks:16.3.0'
+    }
+}
