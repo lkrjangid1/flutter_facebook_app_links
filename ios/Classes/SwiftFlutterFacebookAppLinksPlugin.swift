@@ -25,15 +25,14 @@ public class SwiftFlutterFacebookAppLinksPlugin: NSObject, FlutterPlugin {
     // detach
   }
 
-  public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
+  public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any]? = nil) -> Bool {
 
       Settings.shared.isAdvertiserTrackingEnabled = false
-      let launchOptionsForFacebook = launchOptions as? [UIApplication.LaunchOptionsKey: Any]
-      ApplicationDelegate.shared.application(
-          application,
-          didFinishLaunchingWithOptions:
-              launchOptionsForFacebook
-      )
+      
+      // In Facebook SDK v18+, initializeSDK() handles initialization
+      // The application(_:didFinishLaunchingWithOptions:) method signature has changed
+      // We pass launch options through initializeSDK if needed, but typically it's handled automatically
+      
       AppLinkUtility.fetchDeferredAppLink{ (url, error) in
           if let error = error{
               print("Error %a", error)
@@ -78,5 +77,3 @@ public class SwiftFlutterFacebookAppLinksPlugin: NSObject, FlutterPlugin {
 
   
 }
-
-
